@@ -25,7 +25,7 @@
   },
   "license": "MIT",
   "private": false,
-  "packageManager": "pnpm@11.8.0",
+  "packageManager": "pnpm@11.9.0",
   "scripts": {
     "build": "tsc -p gulpfile.tsconfig.json && gulp",
     "lint": "eslint src --ext ts",
@@ -37,9 +37,9 @@
     "@types/jest": "30.0.0",
     "@types/msgpack-lite": "0.1.12",
     "@types/node": "24.13.2",
-    "@typescript-eslint/eslint-plugin": "8.61.1",
-    "@typescript-eslint/parser": "8.61.1",
-    "eslint": "10.5.0",
+    "@typescript-eslint/eslint-plugin": "8.62.1",
+    "@typescript-eslint/parser": "8.62.1",
+    "eslint": "10.6.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
@@ -51,11 +51,11 @@
     "mkdirp": "3.0.1",
     "nerdbank-gitversioning": "3.10.85",
     "path": "0.12.7",
-    "prettier": "3.8.4",
+    "prettier": "3.9.4",
     "ts-jest": "29.4.11",
     "ts-node": "10.9.2",
     "typescript": "6.0.3",
-    "vscode-jsonrpc": "9.0.0"
+    "vscode-jsonrpc": "9.0.1"
   },
   "dependencies": {
     "await-semaphore": "^0.1.3",
