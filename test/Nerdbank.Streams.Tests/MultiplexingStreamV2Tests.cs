@@ -136,6 +136,29 @@ public class MultiplexingStreamV2Tests : MultiplexingStreamTests
     }
 
     [Fact]
+    public async Task AcceptChannelAsync_SmallReceivingWindowSize()
+    {
+        const int offeredWindowSize = 16;
+        const int acceptedWindowSize = 64;
+
+        Task<MultiplexingStream.Channel> offeredChannelTask = this.mx1.OfferChannelAsync(
+            "small-window",
+            new MultiplexingStream.ChannelOptions { ChannelReceivingWindowSize = offeredWindowSize },
+            this.TimeoutToken);
+        Task<MultiplexingStream.Channel> acceptedChannelTask = this.mx2.AcceptChannelAsync(
+            "small-window",
+            new MultiplexingStream.ChannelOptions { ChannelReceivingWindowSize = acceptedWindowSize },
+            this.TimeoutToken);
+
+        MultiplexingStream.Channel[] channels = await WhenAllSucceedOrAnyFail(offeredChannelTask, acceptedChannelTask).WithCancellation(this.TimeoutToken);
+
+        await this.TransmitAndVerifyAsync(channels[0].AsStream(), channels[1].AsStream(), new byte[] { 1, 2, 3 });
+        await this.TransmitAndVerifyAsync(channels[1].AsStream(), channels[0].AsStream(), new byte[] { 4, 5, 6 });
+
+        await CompleteChannelsAsync(channels);
+    }
+
+    [Fact]
     public async Task Backpressure_CopyToAsync()
     {
         long backpressureThreshold = this.mx1.DefaultChannelReceivingWindowSize;
