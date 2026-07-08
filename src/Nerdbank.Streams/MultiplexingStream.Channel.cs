@@ -761,7 +761,7 @@ namespace Nerdbank.Streams
 
                         var writerRelay = new Pipe();
                         Pipe? readerRelay = this.BackpressureSupportEnabled
-                            ? new Pipe(new PipeOptions(pauseWriterThreshold: this.localWindowSize.Value + 1)) // +1 prevents pause when remote window is exactly filled
+                            ? new Pipe(new PipeOptions(pauseWriterThreshold: this.localWindowSize.Value + 1, resumeWriterThreshold: this.localWindowSize.Value)) // +1 prevents pause when remote window is exactly filled
                             : new Pipe();
                         this.mxStreamIOReader = writerRelay.Reader;
                         this.mxStreamIOWriter = readerRelay.Writer;
